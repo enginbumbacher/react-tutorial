@@ -2,43 +2,35 @@ import React, {Component} from 'react'
 
 class Form extends Component {
   initialState = {
-    name: '',
-    job: '',
+    queryTerm: '',
   }
 
   state = this.initialState
 
   handleChange = (event) => {
-    const {name, value} = event.target
+    const {queryTerm} = event.target
 
     this.setState({
-      [name]: value,
+      queryTerm: event.target.value
     })
   }
 
   submitForm = () => {
-    this.props.handleSubmit(this.state)
+    this.props.handleSubmit(this.state.queryTerm)
     this.setState(this.initialState)
   }
 
   render() {
-    const { name, job } = this.state;
+    const { queryTerm } = this.state;
 
     return (
       <form>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="queryTerm">Query (no space)</label>
         <input
           type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={this.handleChange} />
-        <label htmlFor="job">Job</label>
-        <input
-          type="text"
-          name="job"
-          id="job"
-          value={job}
+          name="queryTerm"
+          id="queryTerm"
+          value={queryTerm}
           onChange={this.handleChange} />
         <input type="button" value="Submit" onClick={this.submitForm} />
       </form>
